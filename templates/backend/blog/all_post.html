@@ -1,0 +1,135 @@
+{% extends 'backend/backend_base.html' %}
+{% load static %}
+
+{% block title %}LandLagos{% endblock title %}
+{% block CSS %}
+        <!--Data Table-->
+        <link href="{% static 'backend/bower_components/datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-tabletools/css/dataTables.tableTools.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-colvis/css/dataTables.colVis.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-responsive/css/responsive.dataTables.scss' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-scroller/css/scroller.dataTables.scss' %}" rel="stylesheet">
+
+ {% endblock CSS %}
+
+            {% block page_content %}
+            <!--main content start-->
+
+            <div id="content" class="ui-content">
+                <!--page header start-->
+                <div class="page-head-wrap">
+                    <h4 class="margin0">
+                        Blog List
+                    </h4>
+                    <div class="breadcrumb-right hidden-sm hidden-xs">
+                        <ol class="breadcrumb">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="{% url 'new_post' %}">New Blog</a></li>
+                            <li class="active">Blog List</li>
+                        </ol>
+                    </div>
+                </div>
+                <!--page header end-->
+                <div class="ui-content-body">
+                    <div class="ui-container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <section class="panel">
+
+                                    <div class="panel-body table-responsive">
+                                        <table class="table convert-data-table table-striped">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>
+                                                        ID
+                                                    </th>
+                                                    <th>
+                                                        Title
+                                                    </th>
+{#                                                    <th>#}
+{#                                                        Author#}
+{#                                                    </th>#}
+                                                    <th>
+                                                        Date
+                                                    </th>
+                                                    <th>
+                                                        Edited
+                                                    </th>
+{#                                                    <th>#}
+{#                                                        Edited By#}
+{#                                                    </th>#}
+                                                    <th>
+                                                        Status
+                                                    </th>
+                                                    <th>
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for item in object_list %}
+                                                <tr>
+                                                    <td>
+                                                         #{{ item.id }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.title }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.date|timesince}} ago
+                                                    </td>
+                                                    <td>
+                                                        {% if item.last_edited %}
+                                                            {{ item.last_edited|timesince }} ago
+                                                            {% else %}
+                                                            -
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if item.publish is True %}
+                                                            <label class="label label-success">Online</label>
+                                                        {% else %}
+                                                            <label class="label label-dark">offline</label>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <a href="{% url 'edit_blog_post' item.slug %}"><button class="btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Edit Post"><i class="fa fa-edit"></i></button></a>
+                                                        <a href="{% url 'delete_post' item.id %}" class="confirm-delete"><button class="btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Delete Post"><i class="fa fa-trash"></i></button></a>
+                                                        {% if item.publish is False %}
+                                                        <a href="{% url 'approve_post' item.id %}" class="confirm-activate"><button class="btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Approve Post"><i class="fa fa-check"></i></button></a>
+                                                        {% else %}
+                                                        <a href="{% url 'disapprove_post' item.id %}" class="confirm-deactivate"><button class="btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Dis-Prove Post"><i class="fa fa-times"></i></button></a>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--main content end-->
+            {% endblock page_content %}
+
+{% block Chart_JS %}
+
+{% endblock Chart_JS %}
+{% block JS %}
+    <!--Data Table-->
+        <script src="{% static 'backend/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+{#        <script src="{% static 'bower_components/datatables-tabletools/js/dataTables.tableTools.js' %}"></script>#}
+        <script src="{% static 'backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-colvis/js/dataTables.colVis.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-responsive/js/dataTables.responsive.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-scroller/js/dataTables.scroller.js' %}"></script>
+
+        <!--init data tables-->
+        <script src="{% static 'backend/assets/js/init-datatables.js' %}"></script>
+
+{% endblock JS %}

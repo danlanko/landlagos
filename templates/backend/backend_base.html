@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="shortcut icon" type="image/png" href="/imgs/favicon.png" /> -->
+        <title>Home</title>
+        <!-- inject:css -->
+        <link rel="stylesheet" href="{% static 'backend/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/font-awesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/simple-line-icons/css/simple-line-icons.css' %}">
+        <!-- endinject -->
+        <!-- Main Style  -->
+        <link rel="stylesheet" href="{% static 'backend/dist/css/main.css' %}">
+        <!--horizontal-timeline-->
+        <link rel="stylesheet" href="{% static 'backend/assets/js/horizontal-timeline/css/style.css' %}">
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Poppins');
+        </style>
+        <style>
+            /*Cookie Consent Begin*/
+            #cookieConsent {
+                background-color: rgba(20,20,20,0.8);
+                min-height: 26px;
+                font-size: 14px;
+                color: #ccc;
+                line-height: 26px;
+                padding: 8px 0 8px 30px;
+                font-family: "Trebuchet MS",Helvetica,sans-serif;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                display: none;
+                z-index: 9999;
+            }
+            #cookieConsent a {
+                color: #4B8EE7;
+                text-decoration: none;
+            }
+            #closeCookieConsent {
+                float: right;
+                display: inline-block;
+                cursor: pointer;
+                height: 20px;
+                width: 20px;
+                margin: -15px 0 0 0;
+                font-weight: bold;
+            }
+            #closeCookieConsent:hover {
+                color: #FFF;
+            }
+            #cookieConsent a.cookieConsentOK {
+                background-color: #F1D600;
+                color: #000;
+                display: inline-block;
+                border-radius: 5px;
+                padding: 0 20px;
+                cursor: pointer;
+                float: right;
+                margin: 0 60px 0 10px;
+            }
+            #cookieConsent a.cookieConsentOK:hover {
+                background-color: #E0C91F;
+            }
+            /*Cookie Consent End*/
+
+        </style>
+        <style>
+
+            #loading {
+              display: block;
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: 100;
+              width: 100vw;
+              height: 100vh;
+              background-color: rgba(192, 192, 192, 0.5);
+              background-image: url("https://i.stack.imgur.com/MnyxU.gif");
+              background-repeat: no-repeat;
+              background-position: center;
+            }
+        </style>
+        {% block CSS %}
+
+        {% endblock CSS %}
+
+    </head>
+    <body style="font-family: 'Poppins', sans-serif;" class="page">
+
+        <div id="ui" class="ui">
+
+            <!--header start-->
+            <header id="header" class="ui-header">
+
+                <div class="navbar-header">
+                    <!--logo start-->
+                    <a href="#" class="navbar-brand">
+                        <span class="logo"><h2 style="margin-top: 0px; font-size: 20px; text-align: center">LAND LAGOS</h2></span>
+{#                        <img style="max-height: 45px; margin-top: 0px" src="{% static 'img/logo/logo.png' %}">#}
+                        <span class="logo-compact"><h3 style="margin-top: 0px; font-size: 10px">LLD</h3></span>
+                    </a>
+                    <!--logo end-->
+                </div>
+
+            </header>
+            <!--header end-->
+            <!--sidebar start-->
+            <aside id="aside" class="ui-aside"  style="background: #262626">
+                <ul class="nav" ui-nav>
+                    <li class="nav-head">
+                        <h5 class="nav-title text-uppercase light-txt">Navigation</h5>
+                    </li>
+                    <li>
+                        <a href="{% url 'new_post' %}">
+                            <i class="fa fa-globe"></i>
+                            <span>Create Blog</span>
+                        </a>
+                    <li>
+                        <a href="{% url 'post_list' %}">
+                            <i class="fa fa-list"></i>
+                            <span>All Blogs</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </aside>
+            <!--sidebar end-->
+
+            {% if messages %}
+                {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <span style="margin-left: 10px">{{ message }}</span>
+                        </div>
+                {% endfor %}
+            {% endif %}
+            {% block page_content %}
+            <!--main content start-->
+                <hi>Please create a block with page_content and start coding :) </hi>
+            <!--main content end-->
+            {% endblock page_content %}
+
+            <div id="loading"></div>
+            <div id="footer" class="ui-footer">
+                2019 &copy; Land Lagos Assessment
+            </div>
+            <!--footer end-->
+
+        </div>
+
+        <!-- inject:js -->
+        <script src="{% static 'backend/bower_components/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/jquery.nicescroll/dist/jquery.nicescroll.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/autosize/dist/autosize.min.js' %}"></script>
+        <!-- endinject -->
+
+        <!--horizontal-timeline-->
+        <script src="{% static 'backend/assets/js/horizontal-timeline/js/jquery.mobile.custom.min.js' %}"></script>
+        <script src="{% static 'backend/assets/js/horizontal-timeline/js/main.js' %}"></script>
+
+        <!-- Common Script   -->
+        <script src="{% static 'backend/dist/js/main.js' %}"></script>
+        <script>
+            $(document).ready(function(){
+                setTimeout(function () {
+                    $("#cookieConsent").fadeIn(200);
+                 }, 4000);
+                $("#closeCookieConsent, .cookieConsentOK").click(function() {
+                    $("#cookieConsent").fadeOut(200);
+                });
+            });
+
+        </script>
+        <script>
+
+            $(document).on('click', '.confirm-delete', function(){
+            return confirm('You are about to delete some sensitive information, Are you sure you want to proceed?');
+             });
+
+            function onReady(callback) {
+                  var intervalId = window.setInterval(function() {
+                    if (document.getElementsByTagName('body')[0] !== undefined) {
+                      window.clearInterval(intervalId);
+                      callback.call(this);
+                    }
+                  }, 1000);
+                }
+
+                function setVisible(selector, visible) {
+                  document.querySelector(selector).style.display = visible ? 'block' : 'none';
+                }
+
+                onReady(function() {
+                  setVisible('.page', true);
+                  setVisible('#loading', false);
+                });
+        </script>
+
+        {% block JS  %}
+
+        {% endblock JS %}
+
+
+    </body>
+</html>
